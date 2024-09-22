@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { TaskComponent } from "./task/task.component";
 import { NewTaskComponent } from "./new-task/new-task.component";
+import { newTaskData } from './task/task.model';
 
 @Component({
   selector: 'app-tasks',
@@ -51,6 +52,17 @@ export class TasksComponent {
   }
 
   onCancelAddTask() {
+    this.isAddingTask = false;
+  }
+
+  onAddTask(taskData: newTaskData) {
+    this.tasks.push({
+      id: new Date().getTime().toString(),
+      title: taskData.title,
+      summary: taskData.summary,
+      userId: this.userId,
+      dueDate: taskData.date,
+    })
     this.isAddingTask = false;
   }
 }
